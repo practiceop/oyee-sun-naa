@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Madam Jii?</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Pixel font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      /* softer but more colorful bg */
+      background:
+        radial-gradient(circle at 0% 0%, #ffe2f2 0, #fffafb 40%, #ffeef7 80%),
+        radial-gradient(circle at 100% 100%, #ffe6ff 0, #fffafb 45%, #ffe2f4 90%);
+      font-family: "Press Start 2P", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+
+    /* pixel panel */
+    .pixel-panel {
+      background: #ffe8f3;
+      border: 4px solid #ffbfdc;
+      box-shadow:
+        0 0 0 2px #ff9fc9,
+        0 6px 0 #ff9fc9;
+    }
+
+    .pixel-panel-inner {
+      border: 3px solid #ffd5ec;
+      background: #ffe2f2;
+    }
+
+    .pixel-box {
+      border-right: 3px solid #ffd5ec;
+      background: #ffe5f2;
+    }
+
+    .pixel-heart {
+      width: 18px;
+      height: 16px;
+      image-rendering: pixelated;
+    }
+
+    /* simple 8-bit heart using CSS */
+    .pixel-heart::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 16px;
+      background:
+        /* top row */
+        linear-gradient(#ff9fc9 4px, transparent 0) 4px 0 / 10px 4px,
+        /* row 2 */
+        linear-gradient(#ff9fc9 4px, transparent 0) 0 4px / 18px 4px,
+        /* row 3 */
+        linear-gradient(#ff9fc9 4px, transparent 0) 0 8px / 18px 4px,
+        /* row 4 */
+        linear-gradient(#ff9fc9 4px, transparent 0) 4px 12px / 10px 4px;
+      background-repeat: no-repeat;
+    }
+
+    /* buttons – pixel style */
+    .pixel-btn {
+      border: 2px solid #ffbfdc;
+      box-shadow:
+        0 0 0 1px #ff9fc9,
+        0 3px 0 #ff9fc9;
+      background: #ffe8f3;
+      text-transform: lowercase;
+    }
+    
+    @media (min-width: 640px) {
+      .pixel-btn {
+        border: 3px solid #ffbfdc;
+        box-shadow:
+          0 0 0 2px #ff9fc9,
+          0 4px 0 #ff9fc9;
+      }
+    }
+
+    .pixel-btn:active {
+      transform: translateY(2px);
+      box-shadow:
+        0 0 0 2px #ff9fc9,
+        0 2px 0 #ff9fc9;
+    }
+
+    /* background float animations */
+    @keyframes float-soft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes spin-soft {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .float-soft { animation: float-soft 4s ease-in-out infinite; }
+    .spin-soft { animation: spin-soft 18s linear infinite; }
+
+    /* smooth grow on YES button */
+    .grow-transition {
+      transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+    }
+
+    /* optional fade-out for smooth redirect */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.6s ease-out;
+    }
+
+    /* subtle blur for bg decorations on mobile so main content pops */
+    .bg-soft-blur {
+      filter: blur(0.2px);
+    }
+
+    @media (min-width: 768px) {
+      .bg-soft-blur {
+        filter: blur(0);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4">
+
+  <!-- Background SVG flowers & stars -->
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-soft-blur">
+    <!-- top-left flowers -->
+    <svg class="absolute -left-6 -top-4 w-32 opacity-50 spin-soft" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="10" fill="#ffde7b"/>
+      <circle cx="32" cy="40" r="18" fill="#ffc7dd"/>
+      <circle cx="88" cy="40" r="18" fill="#ffc7dd"/>
+      <circle cx="36" cy="88" r="18" fill="#ffc7dd"/>
+      <circle cx="84" cy="88" r="18" fill="#ffc7dd"/>
+    </svg>
+
+    <!-- top-right flower cluster -->
+    <svg class="absolute -right-10 -top-6 w-40 opacity-55 float-soft" viewBox="0 0 140 140" fill="none">
+      <circle cx="70" cy="70" r="12" fill="#ffb4d4"/>
+      <circle cx="38" cy="42" r="20" fill="#ffd5ec"/>
+      <circle cx="108" cy="44" r="20" fill="#ffc7dd"/>
+      <circle cx="42" cy="104" r="20" fill="#ffdeef"/>
+      <circle cx="104" cy="104" r="20" fill="#ffd5ec"/>
+    </svg>
+
+    <!-- small stars center -->
+    <svg class="absolute left-1/2 top-1/3 -translate-x-1/2 w-40 opacity-45 float-soft" viewBox="0 0 100 60" fill="none">
+      <path d="M18 4 L21 12 L30 14 L22 18 L20 26 L16 20 L8 18 L15 13 Z" fill="#ffbcd8"/>
+      <path d="M62 10 L64 16 L70 18 L65 20 L63 26 L60 21 L54 19 L59 17 Z" fill="#ffd5ec"/>
+      <circle cx="20" cy="46" r="3" fill="#ffd5ec"/>
+      <circle cx="46" cy="34" r="2.5" fill="#ffc7dd"/>
+      <circle cx="78" cy="46" r="3" fill="#ffd5ec"/>
+    </svg>
+
+    <!-- bottom-right flower -->
+    <svg class="absolute right-0 bottom-0 w-40 opacity-50 float-soft" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="11" fill="#ffb4d4"/>
+      <circle cx="30" cy="34" r="19" fill="#c7d8ff"/>
+      <circle cx="92" cy="36" r="19" fill="#c7d8ff"/>
+      <circle cx="32" cy="90" r="19" fill="#c7d8ff"/>
+      <circle cx="90" cy="90" r="19" fill="#c7d8ff"/>
+    </svg>
+
+    <!-- bottom-left flower cluster -->
+    <svg class="absolute -left-6 bottom-0 w-40 opacity-55 spin-soft" viewBox="0 0 140 140" fill="none">
+      <circle cx="70" cy="70" r="12" fill="#ff9fc9"/>
+      <circle cx="40" cy="40" r="20" fill="#ffc7dd"/>
+      <circle cx="100" cy="46" r="19" fill="#ffd5ec"/>
+      <circle cx="40" cy="104" r="19" fill="#ffc7dd"/>
+      <circle cx="102" cy="104" r="19" fill="#ffe2f7"/>
+    </svg>
+
+    <!-- mid-left vertical flowers -->
+    <svg class="absolute left-2 top-1/3 w-20 opacity-40 float-soft" viewBox="0 0 80 160" fill="none">
+      <circle cx="40" cy="24" r="12" fill="#ffd5ec"/>
+      <circle cx="18" cy="56" r="10" fill="#ffbcd8"/>
+      <circle cx="52" cy="86" r="11" fill="#ffc7dd"/>
+      <circle cx="24" cy="120" r="12" fill="#ffe2f4"/>
+    </svg>
+
+    <!-- mid-right vertical flowers -->
+    <svg class="absolute right-4 top-1/3 w-20 opacity-40 float-soft" viewBox="0 0 80 160" fill="none">
+      <circle cx="40" cy="30" r="12" fill="#ffe2f7"/>
+      <circle cx="56" cy="70" r="10" fill="#ffc7dd"/>
+      <circle cx="22" cy="104" r="11" fill="#ffd5ec"/>
+      <circle cx="48" cy="138" r="12" fill="#ffb4d4"/>
+    </svg>
+
+    <!-- scattered little plus stars - left bottom -->
+    <svg class="absolute left-8 bottom-16 w-24 opacity-35" viewBox="0 0 80 80" fill="none">
+      <path d="M10 36h4v-4h4v4h4v4h-4v4h-4v-4h-4z" fill="#ffbfdc"/>
+      <path d="M48 12h3v-3h3v3h3v3h-3v3h-3v-3h-3z" fill="#ffd5ec"/>
+      <path d="M58 50h3v-3h3v3h3v3h-3v3h-3v-3h-3z" fill="#ffc7dd"/>
+    </svg>
+
+    <!-- scattered little plus stars - top center -->
+    <svg class="absolute left-1/2 top-4 -translate-x-1/2 w-24 opacity-35" viewBox="0 0 80 80" fill="none">
+      <path d="M18 22h3v-3h3v3h3v3h-3v3h-3v-3h-3z" fill="#ffd5ec"/>
+      <path d="M46 40h3v-3h3v3h3v3h-3v3h-3v-3h-3z" fill="#ffbfdc"/>
+    </svg>
+
+    <!-- scattered little plus stars - right middle -->
+    <svg class="absolute right-6 top-1/2 w-20 opacity-35" viewBox="0 0 80 80" fill="none">
+      <path d="M22 30h3v-3h3v3h3v3h-3v3h-3v-3h-3z" fill="#ffc7dd"/>
+      <path d="M46 52h3v-3h3v3h3v3h-3v3h-3v-3h-3z" fill="#ffd5ec"/>
+    </svg>
+  </div>
+
+  <!-- Main content -->
+  <div class="relative flex flex-col items-center max-w-md mx-auto">
+    <!-- Kitty GIF (bigger now) -->
+    <div class="w-36 h-36 sm:w-44 sm:h-44 mb-3 sm:mb-4 flex items-end justify-center">
+      <!-- Replace src with your Hello Kitty GIF -->
+      <img src="./gif1.gif" alt="Hello Kitty" class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain" />
+    </div>
+
+    <!-- Pixel banner -->
+    <div class="pixel-panel rounded-lg inline-block w-full max-w-xs sm:max-w-sm">
+      <div class="pixel-panel-inner rounded-sm flex items-stretch">
+        <!-- left box with heart -->
+        <div class="pixel-box w-16 sm:w-20 flex items-center justify-center">
+          <div class="pixel-heart"></div>
+        </div>
+        <!-- caption -->
+        <div class="flex-1 flex items-center justify-center px-2 sm:px-3 py-2 sm:py-3">
+          <p class="text-[8px] sm:text-[10px] md:text-[11px] text-[#ff73aa] tracking-[0.08em] text-center">
+            will you be my madam jii
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-5 sm:mt-6 flex items-center gap-3 sm:gap-4 justify-center w-full px-4">
+      <button id="yesBtn"
+              class="pixel-btn rounded-sm text-[#ff73aa] grow-transition text-[9px] sm:text-[10px] px-4 sm:px-5 py-2 sm:py-2.5">
+        yes ♡
+      </button>
+      <button id="noBtn"
+              class="pixel-btn rounded-sm text-[#ff73aa] transform transition-all duration-300 ease-out text-[9px] sm:text-[10px] px-4 sm:px-5 py-2 sm:py-2.5">
+        no :(
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
+
+    let yesScale = 1; // starting size for YES button
+
+    noBtn.addEventListener("click", () => {
+      // Increase YES size smoothly every time (no limit)
+      yesScale += 0.3;
+      yesBtn.style.transform = `scale(${yesScale})`;
+      yesBtn.style.boxShadow =
+        "0 0 0 2px #ff7fb6, 0 6px 0 #ff7fb6, 0 0 16px rgba(255,127,182,0.7)";
+
+      // make NO shrink and fade a bit
+      noBtn.style.transform = "scale(0.9)";
+      noBtn.classList.add("opacity-60");
+
+      // cute text tease
+      noBtn.textContent = "no (not allowed)";
+    });
+
+    yesBtn.addEventListener("click", () => {
+      yesBtn.textContent = "yayy madam jii ♡";
+
+      // optional page fade-out then redirect
+      document.body.classList.add("fade-out");
+
+      setTimeout(() => {
+        // Change "next.html" to your actual next page
+        window.location.href = "why.html";
+      }, 600); // matches fade duration
+    });
+  </script>
+</body>
+</html>
